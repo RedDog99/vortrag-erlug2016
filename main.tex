@@ -1,0 +1,101 @@
+\documentclass[12pt,hyperref={pdfpagelabels=false},notes=show]{beamer}
+
+% Bugfix for pdfpagelables=false
+\providecommand\thispdfpagelabel[1]{}
+
+% Standard packages
+
+\usepackage[english,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+
+% Setup TikZ
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+
+% Text \us
+\usepackage{textcomp}
+\usepackage{mathcomp}
+
+% Textpos
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+
+% Blitz-Symbol
+\usepackage{stmaryrd}
+
+% Farben für die Tabellen
+\usepackage{array}
+\usepackage{colortbl}
+\definecolor{lightblue}{rgb}{ 0.55, 0.55, 1.00}
+\definecolor{lightred}{rgb}{  1.00, 0.35, 0.35}
+\definecolor{lightgreen}{rgb}{0.50, 1.00, 0.50}
+\newcommand{\ccg}{\cellcolor{lightgreen}}
+\newcommand{\ccr}{\cellcolor{lightred}}
+\newcommand{\ccb}{\cellcolor{lightblue}}
+
+%%%%%%%%%%%%%%%%%%%%%% /LAYOUT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Author, Title, etc.
+
+\title{Die Technik hinter Freifunk Franken}
+
+\subtitle{ICMP7 $\#/\backslash$ $\leftarrow$ Hackercamp}
+
+\author{Tim Niemeyer\\{\tiny \url{tim@freifunk-franken.de}}}
+
+\institute{Freifunk Franken\\{\tiny \url{www.freifunk-franken.de}}}
+
+\date[5.8.2014]{05.08.2014}
+
+\newcommand{\zb}{z.\,B.\@}
+\newcommand{\us}{~\textmu{}s}
+\newcommand{\uv}{~\textmu{}V}
+\newcommand{\ms}{~ms}
+\newcommand{\prt}{PREEMPT\underline{~~}RT}
+
+\begin{document}
+
+%\usebackgroundtemplate{\includegraphics[height=\paperheight,width=\paperwidth]{slides_background_title}}
+
+\beamertemplatenavigationsymbolsempty
+\begin{frame}[plain,squeeze]
+	\maketitle
+\end{frame}\addtocounter{framenumber}{-1}
+
+%\usebackgroundtemplate{\includegraphics[height=\paperheight,width=\paperwidth]{slides_background}}
+
+\begin{frame}{Inhalt}
+    \hspace{0.1\textwidth}
+    \parbox[c][0.8\textheight][s]{0.8\textwidth}{
+        \tableofcontents
+    }
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{einleitung}
+\include{firmware}
+\include{compile}
+\include{vpn}
+\include{gateway}
+\include{netmon}
+\include{aktuelles}
+
+\section*{}
+\begin{frame}{Ende}
+    \begin{center}
+        Vielen Dank für Euro Aufmerksamkeit	...
+     \end{center}
+\end{frame}\addtocounter{framenumber}{-1}
+	
+\section*{}
+\include{reserve}
+
+%%%%%%%%%%%%%%%%%%%%%% /CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
