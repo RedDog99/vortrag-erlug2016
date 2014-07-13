@@ -1,0 +1,127 @@
+% Copyright 2004 by Manuel Carro <mcarro@fi.upm.es>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeFFF.sty,v 1.2 2007/01/28 20:48:30 tantau Exp $
+
+\mode<presentation>
+
+%\newif\ifbeamer@secheader
+%\beamer@secheaderfalse
+%
+%\DeclareOptionBeamer{secheader}{\beamer@secheadertrue}
+%\ProcessOptionsBeamer
+
+\usecolortheme{orchid}
+\usecolortheme{whale}
+
+\usecolortheme[RGB={220,0,101}]{structure}
+\definecolor{MainColor}{RGB}{0,0,0}
+
+\useinnertheme[]{circles}
+\useoutertheme{SmallInfosFFF}
+
+\setbeamercolor*{palette primary}{use=structure,fg=MainColor}
+\setbeamercolor*{palette secondary}{use=structure,fg=white}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white}
+\setbeamercolor*{palette quaternary}{fg=white,bg=white}
+
+\setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
+  
+\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+\setbeamercolor*{palette sidebar quaternary}{fg=white}
+
+\setbeamercolor*{normal text}{use=structure,fg=MainColor}
+\setbeamercolor*{subtitle}{use=structure,fg=white}
+\setbeamercolor*{titlelike}{use=structure,fg=black}
+\setbeamercolor*{navigation symbols}{use=structure, bg=structure.fg!40, fg=black!40}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamerfont*{author}{size=\small}
+\setbeamerfont*{title}{size=\normalsize}
+
+
+% Tills' opinion: should be done in an inner theme, not here.
+
+%\useitemizeitemtemplate{rounded}{}
+%\usesubitemizeitemtemplate{%
+%    \tiny\raise2.5pt\hbox{\color{beamerstructure}\textbullet}%
+%}
+%\usesubsubitemizeitemtemplate{%
+%    \tiny\raise2.5pt\hbox{\color{beamerstructure}\textbullet}%
+%}
+
+% This configures the block Environment
+\setbeamercolor{block body}{bg=MainColor!8,fg=MainColor}
+\setbeamercolor{block title}{bg=MainColor!40,fg=black}
+
+% This makes the nice bubbles below the section entries
+\let\origsection\section
+\renewcommand{\section}{\@ifstar\section\newsection}
+\newcommand{\newsection}[1]{\origsection{#1}\subsection*{}}
+
+\setbeamersize{text margin left=1.4em,text margin right=1em}
+
+%\ifbeamer@secheader\else\setbeamertemplate{headline}[default]\fi
+
+% Title page: default
+
+\defbeamertemplate*{title page}{FFF theme}[1][]
+{%
+  \parbox[c][\paperheight][s]{\textwidth}{
+  \vspace*{0.2\textheight}
+  \hspace*{0.3\textwidth}
+    \begin{beamercolorbox}[wd=0.65\textwidth,sep=2pt,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+    \hfill
+    \vspace*{0.05\textheight}
+    \hspace*{0.3\textwidth}
+    \begin{beamercolorbox}[wd=0.65\textwidth,sep=2pt,#1]{subtitle}
+      \ifx\insertsubtitle\@empty%
+        \vphantom{X}\par%
+      \else%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \hfill
+    \vspace{40pt}
+    \hspace*{0.3\textwidth}
+    \begin{beamercolorbox}[wd=0.65\textwidth,sep=2pt,#1]{author}
+      \usebeamerfont{author}\insertauthor\par
+      \ifx\insertinstitute\@empty%
+        \vphantom{X}\par%
+      \else%
+          \usebeamerfont{institute}\insertinstitute\par
+      \fi%
+      \usebeamerfont{date}\insertdate\par
+    \end{beamercolorbox}
+  \vfill
+  \hfill
+    \begin{minipage}[b]{0.4\paperwidth}
+      \includegraphics[width=\textwidth]{img/logo}
+      \vspace{5pt}
+    \end{minipage}
+  }
+}
+
+%\defbeamertemplate*{xxxsidebar right}{FFF theme}
+%{
+%  \vfill%
+%  \llap{\insertlogo\hskip0.1cm}%
+%  \vskip2pt%
+%  \llap{\vspace*{-0.32cm}\usebeamertemplate***{navigation symbols}\hskip0.2cm}%
+%  \vskip2pt%
+%}
+
+\mode
+<all>
