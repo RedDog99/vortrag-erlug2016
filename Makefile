@@ -2,13 +2,14 @@ FILE = main
 DIAS := $(subst .dia,.pdf,$(wildcard img/dia/*.dia))
 TIFS := $(subst .tif,.png,$(wildcard img/tif/*.tif))
 ODSS := $(subst .ods,.pdf,$(wildcard ods/*.ods))
+SVGS := $(subst .svg,.pdf,$(wildcard img/svg/*.svg))
 
 all: show
 
 show: $(FILE).pdf
 	atril $+
 
-$(FILE).pdf: $(FILE).tex $(wildcard *.tex) $(DIAS) $(TIFS) $(PLTS) $(ODSS) vc.tex
+$(FILE).pdf: $(FILE).tex $(wildcard *.tex) $(DIAS) $(TIFS) $(PLTS) $(ODSS) $(SVGS) vc.tex
 	rubber -W all --pdf $<
 
 .PHONY: vc.tex
@@ -24,6 +25,9 @@ img/dia/%.eps: img/dia/%.dia
 img/dia/%.pdf: img/dia/%.eps
 	epstopdf $<
 	/bin/rm $<
+
+img/svg/%.pdf: img/svg/%.svg
+	convert $< $@
 
 ods/%.pdf: ods/%.ods
 	libreoffice --headless --nologo --invisible --convert-to pdf:writer_pdf_Export --outdir ods/ $<
@@ -54,6 +58,7 @@ clean:
 		img/dia/*.pdf \
 		img/dia/*.dia~ \
 		img/tif/*.png \
+		img/svg/*.pdf \
 		main-blx.bib \
 		vc.tex \
 		notes.pdf \

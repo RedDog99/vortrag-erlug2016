@@ -21,6 +21,7 @@ Makefile~
 img/dia/*.pdf
 img/dia/*.dia~
 img/tif/*.png
+img/svg/*.pdf
 main-blx.bib
 vc.tex
 notes.pdf
