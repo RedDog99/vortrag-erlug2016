@@ -60,5 +60,6 @@ clean:
 		*.snm \
 		*.nav \
 		*-blx.bib \
-		$(FILE).run.xml
+		$(FILE).run.xml \
+		*.vrb
 		
