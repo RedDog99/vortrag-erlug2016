@@ -1,9 +1,70 @@
 \section{Firmware}
 
-\begin{frame}{Firmware}
-Nachdem der Aufbau der Firmware geklärt ist, soll ein kurzer Abriss
-über den Bauprozess der aktuellen Firmware gezeigt werden. Auch die
-letzten Entwicklungen der Franken eigenen Firmware werden gezeigt
-und erklärt. An dieser Stelle könnten Vorkenntnisse über OpenWrt
-Vorteilhaft sein, sind aber keine Voraussetzung für den Vortrag.
+%Nachdem der Aufbau der Firmware geklärt ist, soll ein kurzer Abriss
+%über den Bauprozess der aktuellen Firmware gezeigt werden. Auch die
+%letzten Entwicklungen der Franken eigenen Firmware werden gezeigt
+%und erklärt. An dieser Stelle könnten Vorkenntnisse über OpenWrt
+%Vorteilhaft sein, sind aber keine Voraussetzung für den Vortrag.
+
+\begin{frame}[fragile]{Firmware}
+    \only<1-3>{
+        \begin{block}{Wie wird die Firmware gebaut?}
+            \begin{itemize}
+                \item<1-> git clone git://git.freifunk-ol.de/ffol/user/reddog/firmware.git
+                \item<1-> cd firmware
+                \item<1-> ./buildscript
+                \item<3-> ./buildscript selectbsp bsp/board\_wr1043nd.bsp
+                \item<3-> ./buildscript selectcommunity community/franken.cfg
+                \item<3-> ./buildscript
+            \end{itemize}
+        \end{block}
+    }
+
+    \only<2>{
+        \texttt{\scriptsize
+            Please select a Board-Support-Package using:\\
+            ./buildscript selectbsp
+        }
+    }
+
+    \only<4>{
+        \texttt{\scriptsize
+            Working with bsp/board\_wr1043nd.bsp and community/franken.cfg\\[2ex]
+            This is the Build Environment Script of the Freifunk Community\\
+            Oldenburg.\\
+            Usage: ./buildscript command\\
+            command:\\
+            \hspace{1cm}selectcommunity [communityfile]\\
+            \hspace{1cm}selectbsp [bsp file]\\
+            \hspace{1cm}prepare\\
+            \hspace{1cm}config\\
+            \hspace{1cm}build\\
+            \hspace{1cm}flash\\
+            \hspace{1cm}download\\[2ex]
+            If you need help to one of these options just type\\
+            ./buildscript command help\\
+        }
+    }
 \end{frame}
+
+\begin{frame}{Firmware}
+
+    Was passiert beim prepare
+
+    Was passiert beim build
+
+    Was kann man mit config machen
+
+\end{frame}
+
+Wie funktioniert das innen drinne .. sourcen werden geladen etc ..
+
+wann werden patches gemacht
+
+wann wird die config kopiert
+
+was ist ein bsp
+
+wie bau ich ein bsp
+
+was wird sich in 0.5.0 ändern? <- neue bsps
