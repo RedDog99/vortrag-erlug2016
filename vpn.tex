@@ -1,17 +1,16 @@
 \section{VPN}
 
-\begin{frame}{VPN}
-Wie die Wireless Mesh Verbindungen zustande kommen geht aus dem
-Aufbau der Firmware bereits hervor. Wie jedoch die Knoten
-untereinander verbunden werden, soll der Vortrag in einem weiteren
-Abschnitt über das verwendete VPN zeigen. Dazu gehört auch die
-Aufteilung in Subnetze und die Verbindung der Gateways
-untereinander.
-\end{frame}
+%Wie die Wireless Mesh Verbindungen zustande kommen geht aus dem
+%Aufbau der Firmware bereits hervor. Wie jedoch die Knoten
+%untereinander verbunden werden, soll der Vortrag in einem weiteren
+%Abschnitt über das verwendete VPN zeigen. Dazu gehört auch die
+%Aufteilung in Subnetze und die Verbindung der Gateways
+%untereinander.
 
 \begin{frame}{Allgemeines}
     \begin{itemize}
         \item Verwendetes VPN: fastd
+        \item Layer-II Netz
         \item Wir nutzen keine Verschlüsselung (! :-O)
     \end{itemize}
     \begin{block}{fastd}
@@ -92,5 +91,62 @@ untereinander.
                 remote ipv4 "93.194.173.193" port 10000 float;\\
             }
         \end{block}
+    }
+    \only<2>{
+        \begin{itemize}
+            \item Knoten Identifizierung über MAC, alternativ über Name
+            \item Jeweils pro hood:
+            \begin{itemize}
+                \item Clients bekommen eine Liste aller Gateways
+                \item Gateways bekommen eine Liste aller Clients+Gateways
+            \end{itemize}
+        \end{itemize}
+    }
+    \only<3-7>{
+        \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+            ID & mac & name & key & ip & port & gw & hood \\ \hline
+            0 & & roup & abc & 254 & 10000 & true & 1 \\ \hline
+            1 & & roup.fuerth & abd & 254 & 10001 & true & 2 \\ \hline
+            2 & & nue1.fuerth & abe & 129 & 10001 & true & 2 \\ \hline
+            3 & ab: & default-1 & abf & 1 & 10000 & false & 1 \\ \hline
+            4 & cd: & default-2 & aca & 2 & 10000 & false & 1 \\ \hline
+            5 & ef: & fuerth-1 & acb & 3 & 10000 & false & 2 \\ \hline
+        \end{tabular}
+
+        \only<4,5>{
+            \begin{block}{?mac=ab:\&name=default-1\&..}
+                \alt<4>{
+                    SELECT ID,gw,hood FROM nodes WHERE mac = \$mac;\\
+                    if (gw)\\
+                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood\\
+                    else\\
+                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood \& gw=true\\
+                }{
+                    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+                        ID & mac & name & key & ip & port & gw & hood \\ \hline
+                        0 & & roup & abc & 254 & 10000 & true & 1 \\ \hline
+                    \end{tabular}
+                }
+            \end{block}
+        }
+        \only<6,7>{
+            \begin{block}{?mac=\&name=nue1.fuerth\&..}
+                \alt<6>{
+                    SELECT ID,gw,hood FROM nodes WHERE name = \$name;\\
+                    if (gw)\\
+                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood\\
+                    else\\
+                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood \& gw=true\\
+                }{
+                    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+                        ID & mac & name & key & ip & port & gw & hood \\ \hline
+                        1 & & roup.fuerth & abd & 254 & 10001 & true & 2 \\ \hline
+                        2 & & nue1.fuerth & abe & 129 & 10001 & true & 2 \\ \hline
+                        5 & ef: & fuerth-1 & acb & 3 & 10000 & false & 2 \\ \hline
+                    \end{tabular}
+
+                }
+            \end{block}
+        }
     }
 \end{frame}
