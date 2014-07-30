@@ -8,3 +8,90 @@ Abschnitt über das verwendete VPN zeigen. Dazu gehört auch die
 Aufteilung in Subnetze und die Verbindung der Gateways
 untereinander.
 \end{frame}
+
+\begin{frame}{Allgemeines}
+    \begin{itemize}
+        \item Verwendetes VPN: fastd
+        \item Wir nutzen keine Verschlüsselung (! :-O)
+    \end{itemize}
+    \begin{block}{fastd}
+        % todo: was ist fastd ?
+        There are no server and client roles defined by the
+        protocol, this is just defined by the usage.
+        \begin{itemize}
+            \item Only one instance of the daemon is needed on each
+                host to create a full mesh
+            \item If no full mesh is established, a routing protocol
+                is necessary to enable hosts that are not connected
+                directly to reach each other
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Allgemeines}
+    \begin{itemize}
+        \item fastd Integration durch
+        \begin{itemize}
+            \item fastdstart.sh auf der Client-Seite
+                \footnote{bsp/default/root\_file\_system/etc/fastdstart.sh.tpl}
+            \item \$project\_\$hood\_fastd.sh auf der Server-Seite
+                \footnote{auf den Gateways (!) Todo: befreien!}
+            \item VPN-KeyXchange als Schlüsseltausch
+                \footnote{\url{
+                    http://git.freifunk-ol.de/projects/ffol/main.git}Todo refresh!}
+        \end{itemize}
+        \item Aufteilung in ,,hood''s:
+        \begin{itemize}
+            \item Stellt ein Layer-II Netz dar
+            \item Ein Gateway kann mehrere Layer-II Netze bedienen
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\alt<1>{fastdstart.sh}{\$project\_\$hood\_fastd.sh}}
+    \begin{itemize}
+        \item \only<1>{Testet Internet-Connectivität}
+        \item Legt fastd Konfiguration
+            /etc/fastd/\$project\only<2>{.\$hood}/ \only<1>{im tmpfs} an:
+            \footnote{\$project ist bei uns immer ,,fff''.}
+            \begin{itemize}
+                \item \$project.conf
+                \item up.sh
+                \item down.sh
+                \item peers/
+            \end{itemize}
+        \item Erzeugt Pub/Priv-Keypaar
+        \item Startet fastd
+        \item Meldet sich beim VPN-KeyXchange an
+        \item Lädt Liste mit Peers
+        \item Refresht fastd
+        \item \only<2>{Löscht verwaiste Peers}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{VPN-KeyXchange}
+    \only<1>{
+        \begin{block}{HTTP Schnittstelle}
+            \texttt{\tiny
+                http://mastersword.de/\textasciitilde{}reddog/\$project/?mac=\$mac\&name=\$hostname\&port=\$port\&key=\$pubkey
+            }
+        \end{block}
+
+        \begin{block}{Rückmeldung}
+            \texttt{\tiny
+                \#\#\#\#romauplink.conf\\
+                \#name "romauplink";\\
+                key "9a8ee8b797eed5d3b06778c47fe670987a0eda791ca557da56e6198be45f24c6";\\
+                remote ipv4 "109.163.229.254" port 10000 float;\\[2ex]
+                \#\#\#\#fff.conf\\
+                \#name "fff";\\
+                key "543ebc33b36210b10edf62fdb560e3ceac6c64b4ed9ad852f39954522934cd8a";\\
+                remote ipv4 "192.168.30.23" port 10000 float;\\[2ex]
+                \#\#\#\#90F652F45C34.conf\\
+                \#name "ChamHH8Dachboden1";\\
+                key "d0e4900fae535d189ef070a527dd00ce2688f3ff7f2b31c4f2846cb658b855fb";\\
+                remote ipv4 "93.194.173.193" port 10000 float;\\
+            }
+        \end{block}
+    }
+\end{frame}
