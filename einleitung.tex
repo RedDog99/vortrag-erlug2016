@@ -1,7 +1,51 @@
 \section{Einleitung}
 
 \begin{frame}{Einleitung}
-Der Vortrag gibt zunächst eine kurze allgemeine Einführung zum Thema
-Freifunk. Freifunk ist nicht gleich Freifunk, so zeigt der Vortrag
-auch die Besonderheiten aus Franken auf.
+	%Der Vortrag gibt zunächst eine kurze allgemeine Einführung zum Thema Freifunk. Freifunk ist nicht gleich Freifunk, so zeigt der Vortrag auch die Besonderheiten aus Franken auf.
+	\begin{itemize}
+		\item<1-> Freifunk Franken ist lokaler Ableger der Freifunk-Bewegung (freifunk.net)
+		\item<1-> nicht-kommerzielle Initiative für freie Funknetzwerke\\
+							\begin{itemize}
+								\item[$\rightarrow$] Bürger investieren in Eigenregie Zeit, Geld und Enthusiasmus
+							\end{itemize}
+ 		\item<1-> nicht nur \glqq kostenloses Internet\grqq $\Rightarrow$ \glqq freies Netzwerken\grqq\\
+							\begin{itemize}
+								\item<2-> lokal intressante Dienste zur Verfügung stellen (Webcams)
+								\item<2-> Text, Musik und Filme über das interne Freifunk-Netz übertragen
+								\item<2-> über lokale Dienste Chatten oder Telefonieren
+							\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Einleitung}
+	wie es funktioniert:
+	\begin{itemize}
+		\item<1-> Freifunker stellen einen WLAN-Router für sich selbst und den Datentransfer der anderen Teilnehmer zur Verfügung
+							\begin{itemize}
+								\item<1-> ggf. mit Anschluss an das www
+							\end{itemize}
+		\item<1-> benachbarte Router verbinden sich und spannen ein sogenanntes Mesh-Netzwerk auf
+		\item<1-> nicht benachbarte Router verbinden sich mittels VPN-Tunnel zum Freifunk Franken-Server
+		\item<1-> jegliche Verbindung ins www wird hierrüber umgeleitet, um Risiken der Störerhaftung zu entgehen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Einleitung}
+	für den einzelnen Freifunker ist hierzu nötig:
+	\begin{itemize}
+		\item<1-> ein günstiger, unterstützter Router (ab ca. 17€)
+		\item<1-> eine spezielle Linuxdistribution, die Firmware
+		\item<1-> die Zustimmung zum \glqq Pico-Peering Agreement\grqq
+							\begin{itemize}
+								\item<2-> Regelwerk, das grundsätzliche Eigenschaften eines freien Netzwerkes sichert
+													\begin{enumerate}
+														\item Freier Transit
+														\item Offene Kommunikation
+														\item Keine Garantie (Haftungsausschluss)
+														\item Nutzungsbestimmungen
+														\item Lokale (individuelle) Zusätze
+													\end{enumerate}
+							\item<2-> die Freifunk Firmware implementiert diese Grundsätze standardmäßig
+							\end{itemize}
+	\end{itemize}
 \end{frame}
