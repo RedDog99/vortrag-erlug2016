@@ -267,8 +267,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="612.59698"
+     inkscape:zoom="2.8"
+     inkscape:cx="225.18366"
      inkscape:cy="175.19137"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -8351,5 +8351,11 @@
        d="M 801.42857,359.50504 768.57143,472.36218"
        id="path8594"
        inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 215.35714,242.26571 0,64.64285"
+       id="path8596"
+       inkscape:connector-curvature="0"
+       transform="translate(9.9505803,176.87416)" />
   </g>
 </svg>
