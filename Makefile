@@ -27,7 +27,7 @@ img/dia/%.pdf: img/dia/%.eps
 	/bin/rm $<
 
 img/svg/%.pdf: img/svg/%.svg
-	convert $< $@
+	inkscape -f $< -A $@
 
 ods/%.pdf: ods/%.ods
 	libreoffice --headless --nologo --invisible --convert-to pdf:writer_pdf_Export --outdir ods/ $<
