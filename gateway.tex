@@ -21,23 +21,29 @@
     $\longrightarrow$ Das Beispiel hier stammt vom Gateway in Nürnberg
 \end{frame}
 
-
 \begin{frame}{Gateway}
     \begin{block}{Voraussetzungen}
         \begin{itemize}
             \item Server (kein Spielzeug; also kein Pi)
             \item Richtiges Betriebssystem (z.B. ein Debian)
-            %\item ntp ist sinnvoll
-            \item DHCP-Server
-            \item fastd
-            \item batman
-            \item iproute2
-            \item fff\_fuerth\_fastd.sh
+            \item Policy Based Routing
+            \item DHCP- DNS-Server
+            \item batman + fastd (fff\_fuerth\_fastd.sh)
+            \item Lokale Netz Konfiguration
             \item Freifunk-VPN (z.B. ip-ip)
             \item olsr
             \item Ein Tunnel um Traffic ab zu werfen\\
-                z.B. openvpn
         \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Gateway}
+    \begin{block}{Policy Based Routing}
+        \begin{lstlisting}
+- iproute2
+/etc/iproute2/rt_tables:
+10 fff
+        \end{lstlisting}
     \end{block}
 \end{frame}
 
@@ -62,6 +68,19 @@ subnet 10.50.32.0 netmask 255.255.248.0 {
 \end{frame}
 
 \begin{frame}[fragile]{Gateway}
+    \begin{block}{DNS}
+        \begin{lstlisting}
+- dns
+bind installieren
+/etc/bind/named.conf.options:
+       //listen-on-v6 { any; };
+       allow-recursion { 10.50.0.0/16; };
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Gateway}
     \begin{block}{B.A.T.M.A.N}
         \begin{lstlisting}
 batman-adv-2013.4.0
@@ -69,16 +88,6 @@ batctl-2013.4.0
 
 /etc/modules:
 batman-adv
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{Policy Based Routing}
-        \begin{lstlisting}
-- iproute2
-/etc/iproute2/rt_tables:
-10 fff
         \end{lstlisting}
     \end{block}
 \end{frame}
@@ -92,6 +101,13 @@ batman-adv
 AUTOSTART="none"
 
 - fff_fuerth_fastd.sh
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Gateway}
+    \begin{block}{Lokale Netz Konfiguration}
+        \begin{lstlisting}
 /etc/network/interfaces:
 auto ffffuerthVPN
 iface ffffuerthVPN inet manual
@@ -115,18 +131,6 @@ iface bat1 inet manual
     post-down ip rule del to 10.50.32.0/21 table fff
     post-down ip rule del iif $IFACE table fff
     post-down ifconfig $IFACE down
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{DNS}
-        \begin{lstlisting}
-- dns
-bind installieren
-/etc/bind/named.conf.options:
-       //listen-on-v6 { any; };
-       allow-recursion { 10.50.0.0/16; };
         \end{lstlisting}
     \end{block}
 \end{frame}
