@@ -1,9 +1,55 @@
 \section{Netmon}
 
+%Ein spezieller Dienst im Freifunk Franken Netz ist das
+%Network-Monitoring, kurz Netmon. Netmon selbst soll nicht Teil des
+%Vortrags sein, wohl aber die Verbindung zwischen Netmon und den
+%Knoten. Dazu zählt zum Beispiel das Handling der Hostnames und das
+%Einsammeln der Statusdaten.
+
 \begin{frame}{Netmon}
-Ein spezieller Dienst im Freifunk Franken Netz ist das
-Network-Monitoring, kurz Netmon. Netmon selbst soll nicht Teil des
-Vortrags sein, wohl aber die Verbindung zwischen Netmon und den
-Knoten. Dazu zählt zum Beispiel das Handling der Hostnames und das
-Einsammeln der Statusdaten.
+    % hier mal kurz durch das Netmon durchklicken: Karte, Statistik, Routerliste, Routerstatus
+
+    Knoten
+    
+    Netmon
+
+    Nodewatcher
+
+    Configurator
+
+\end{frame}
+
+\begin{frame}{Netmon}
+    Was muss Netmon kennen, damit es den Router anzeigen kann?
+
+    // Anforderungen an Netmon..
+
+    \begin{itemize}
+        \item IP-Adresse des Knotens
+            ...
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Nodewatcher}
+    \begin{itemize}
+        \item Erzeugt XML Datei
+        \item Läuft alle 5 Minuten
+        \item node.data über Webinterface downloadbar
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Configurator}
+    \begin{itemize}
+        \item Knoten kennt Netmon's Link-Local Adresse
+        \item Knoten meldet alle 5 Minuten seine MAC Adresse ans Netmon
+        \item Netmon meldet dabei zurück, dass der Knoten noch nicht eingetragen wurde
+        \item Benutzer ,,übernimmt'' Knoten im Netmon
+        \item (Benutzer gibt dem Knoten einen Namen)
+        \item Knoten meldet wieder seine MAC an Netmon
+        \item Netmon meldet router\_id, update\_hash und api\_key zurück
+        \item Knoten trägt nun seine Link-Local Addresse im Netmon ein
+        \item Netmon pollt einmal alle 10 Minuten nach router-daten
+        \item Knoten pollt alle 5 Minuten nach seinem Hostname
+    \end{itemize}
 \end{frame}
