@@ -47,6 +47,68 @@
     }
 \end{frame}
 
+\begin{frame}[fragile]{Community File}
+    \begin{block}{community/franken.cfg:}
+        \scriptsize
+        \begin{lstlisting}[gobble=12]
+            BATMAN_CHANNEL=1
+            ESSID_AP=franken.freifunk.net
+            ESSID_MESH=batman.franken.freifunk.net
+            BSSID_MESH=02:CA:FF:EE:BA:BE
+            NETMON_IP=fe80::ff:feee:1
+            VPN_PROJECT=fff
+            NTPD_IP=fe80::ff:feee:1%br-mesh
+            UPGRADE_PATH=http://[fe80::ff:feee:1%br-mesh]/dev/firmware/current/
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Board-Support-Package}
+    \begin{block}{bsp/board\_wr740n.bsp:}
+        \scriptsize
+        \begin{lstlisting}[gobble=12]
+            machine=wr740n
+            target=$builddir/$machine
+
+            board_prepare() {
+            }
+            board_prebuild() {
+            }
+            board_postbuild() {
+                cp $target/bin/ar71xx/openwrt-ar71[..]-squashfs-*.bin ./bin/
+            }
+            board_flash() {
+                echo "nothing implemented"
+            }
+            board_clean() {
+                /bin/rm -rf $target bin/*$machine*
+            }
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Board-Support-Package}
+    \begin{block}{bsp/wr740n/}
+        \begin{itemize}
+            \item .config
+            \item root\_file\_system/etc/
+            \begin{itemize}
+                \item rc.local.board
+                \item config/
+                \begin{itemize}
+                    \item board
+                    \item network
+                    \item system
+                \end{itemize}
+                \item crontabs/
+                \begin{itemize}
+                    \item root
+                \end{itemize}
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
 \begin{frame}{Firmware}
 
     Was passiert beim prepare
