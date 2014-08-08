@@ -111,11 +111,31 @@
 
 \begin{frame}{Firmware}
 
+    das BSP file wird als dot Script eingeladen
+    aus dem community file wird dynamisch ein SED skript erzeugt, um die Templates mit den richtigen Werten zu füllen
+
     Was passiert beim prepare
+        Sourcen Downloaden
+        dabei werden alle Sourcen in einen Source Folder geladen, sofern diese dort nicht bereichts vorhanden sind.
+        - OpenWRT
+        - Sämtliche Packages
+        -- ggfs werden Patches angewandt
+        
+        Ein ggfs altes Target wird gelöscht
+        OpenWRT wird ins Target exportiert (kopiert)
+        Eine OpenWRT Feed-Config wird mit dem lokalen Source Verzeichnis als Quelle angelegt
+        Die Feeds werden geladen
+        Spezielle Auswahl an Paketen wird geladen
+        Patches werden angewandt
+        board\_prepare wird aufgerufen (wird. z.B. für Patches für eine bestimmte HW verwendet)
 
     Was passiert beim build
+        prebuild
+        make im OpenWRT
+        postbuild
+        
 
-    Was kann man mit config machen
+    Was kann man mit config machen?
 
 \end{frame}
 
