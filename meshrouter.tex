@@ -1,5 +1,43 @@
 \section{Mesh Router}
 
+\begin{frame}{Anwendungsbeispiele}
+    \begin{block}{Anschlüsse}
+        \begin{itemize}
+            \item Client-Ports \& Infrastructure Funknetz:
+                Wie ein großer Switch
+            \item Batman-Ports \& Ad-Hoc Funknetz:
+                Mesh-Netz
+            \item WAN-Ports:
+                VPN Netz
+        \end{itemize}
+        \center{
+            \includegraphics[width=0.75\textwidth]{img/svg/anschluesse.pdf}
+        }
+    \end{block}
+\end{frame}
+
+\begin{frame}{Anwendungsbeispiele}
+    \begin{block}{Autarkes Layer-2 Netz}
+        Eine Wolke kann ihr Netz von einem Router bekommen der an einen der
+        Client-Ports angeschlossen wird.
+
+        \center{
+            \includegraphics[width=0.8\textwidth]{img/svg/als_grosses_wlan.pdf}
+        }
+    \end{block}
+\end{frame}
+
+\begin{frame}{Anwendungsbeispiele}
+    \begin{block}{Standort mit mehreren Kanälen}
+        Mehrere Knoten können beliebig untereinander per Kabel verbunden werden.
+
+        \center{
+            \includegraphics[width=0.9\textwidth]{img/svg/knoten_mit_mehr_kanaelen_richtungen.pdf}
+        }
+    \end{block}
+\end{frame}
+
+
 \begin{frame}{Mesh Router}
 %Danach geht der Vortrag auf den inneren Aufbau der Router Software
 %(Firmware) ein. Es wird gezeigt, welche Aufgabe ein Router konkret
@@ -52,8 +90,3 @@
 %
 %\end{frame}
 
-\begin{frame}{Anschlüsse}
-\includegraphics[width=0.75\textwidth]{img/svg/anschluesse.pdf}
-
-An die Client Ports können beliebige Geräte an das Netz angeschlossen werden. Es ist auch mit einem Infrastructure Funknetz verbunden. Die Batman Ports, sowie das AdHoc Netz dienen zur Kommunikation zwischen den Routern. Der LAN-Port kann an ein bestehendes LAN angeschlossen werden und baut darüber einen Tunnel auf.
-\end{frame}
