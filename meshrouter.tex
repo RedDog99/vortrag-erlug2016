@@ -50,13 +50,14 @@
 
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|c|c|c|c|c|c|c|} \hline
- \multicolumn{7}{|c|}{Bridge} \\ \hline
- \multirow{2}{*}{Managed} & \multicolumn{4}{c|}{\visible<2->{B.A.T.M.A.N}} & \multicolumn{2}{c|}{\multirow{2}{*}{Client-VLan}} \\ \cline{2-5}
+ \multicolumn{7}{|c|}{\alt<3-4>{\textcolor{gray}{Bridge}}{Bridge}} \\ \hline
+ \multirow{2}{*}{\alt<3-4>{\textcolor{gray}{Managed}}{Managed}} &
+ \multicolumn{4}{c|}{\visible<2->{B.A.T.M.A.N}} &
+ \multicolumn{2}{c|}{\multirow{2}{*}{\alt<3-4>{\textcolor{gray}{Client-VLan}}{Client-VLan}}} \\ \cline{2-5}
  & \visible<3->{Ad-Hoc} & \visible<4->{VPN} & \multicolumn{2}{c|}{\visible<3->{Node-VLan}} & \multicolumn{2}{c|}{} \\ \hline
- \multicolumn{2}{|c|}{Wifi} & \visible<4->{WAN} & \visible<3->{LAN1} & \visible<3->{LAN2} & LAN3 & LAN4 \\ \hline
+ \multicolumn{2}{|c|}{Wifi} & \visible<4->{WAN} & \visible<3->{LAN1} & \visible<3->{LAN2} &
+ \alt<3-4>{\textcolor{gray}{LAN3}}{LAN3} & \alt<3-4>{\textcolor{gray}{LAN4}}{LAN4} \\ \hline
 \end{tabular}
-
-% TODO: Bridge/Managed/Clients grau machen, bei 3-4
 
 \only<1-2>{
         \begin{itemize}
