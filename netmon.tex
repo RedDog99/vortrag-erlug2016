@@ -7,34 +7,30 @@
 %Einsammeln der Statusdaten.
 
 \begin{frame}{Netmon}
-    % hier mal kurz durch das Netmon durchklicken: Karte, Statistik, Routerliste, Routerstatus
-
-    Knoten
-    
-    Netmon
-
-    Nodewatcher
-
-    Configurator
-
-\end{frame}
-
-\begin{frame}{Netmon}
-    Was muss Netmon kennen, damit es den Router anzeigen kann?
-
-    // Anforderungen an Netmon..
-
     \begin{itemize}
-        \item IP-Adresse des Knotens
-            ...
+        \item Nodewatcher
+        \begin{itemize}
+            \item Generiert Status-Daten
+        \end{itemize}
+        \item Configurator
+        \begin{itemize}
+            \item Verknüpft Netmon und Knoten
+        \end{itemize}
+        \item Crawler
+        \begin{itemize}
+            \item Sammelt Status-Daten
+        \end{itemize}
+        \item Netmon
+        \begin{itemize}
+            \item Visualisiert Status-Daten
+        \end{itemize}
     \end{itemize}
 \end{frame}
-
 
 \begin{frame}{Nodewatcher}
     \begin{itemize}
         \item Erzeugt XML Datei
-        \item Läuft alle 5 Minuten
+        \item Läuft alle 5 Minuten auf den Knoten
         \item node.data über Webinterface downloadbar
     \end{itemize}
 \end{frame}
@@ -48,8 +44,33 @@
         \item (Benutzer gibt dem Knoten einen Namen)
         \item Knoten meldet wieder seine MAC an Netmon
         \item Netmon meldet router\_id, update\_hash und api\_key zurück
-        \item Knoten trägt nun seine Link-Local Addresse im Netmon ein
-        \item Netmon pollt einmal alle 10 Minuten nach router-daten
+        \item Knoten trägt seine Link-Local Adresse im Netmon ein
+        \item Netmon pollt einmal alle 10 Minuten nach Router-Daten
         \item Knoten pollt alle 5 Minuten nach seinem Hostname
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Crawler}
+    \begin{block}{Pollt alle Router jeweils alle 10 Minuten}
+        \begin{itemize}
+            \item Jeweils 20 Knoten nacheinander
+            \item Ping (mit PsExecute für Timeout)
+            \begin{itemize}
+                \item Bohrt neigh Tabelle auf
+                \item Eliminiert initial Timeout
+            \end{itemize}
+            \item curl'ed node.data
+            \item Dekodiert xml
+            \item Füllt MySQL Tabellen
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Netmon}
+    \begin{itemize}
+        \item Wie sieht Netmon aus?
+        \begin{itemize}
+            \item[$\rightarrow$] \url{http://netmon.freifunk-franken.de}
+        \end{itemize}
     \end{itemize}
 \end{frame}
