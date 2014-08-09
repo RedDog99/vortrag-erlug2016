@@ -109,44 +109,61 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Firmware}
-
-    das BSP file wird als dot Script eingeladen
-    aus dem community file wird dynamisch ein SED skript erzeugt, um die Templates mit den richtigen Werten zu füllen
-
-    Was passiert beim prepare
-        Sourcen Downloaden
-        dabei werden alle Sourcen in einen Source Folder geladen, sofern diese dort nicht bereichts vorhanden sind.
-        - OpenWRT
-        - Sämtliche Packages
-        -- ggfs werden Patches angewandt
-        
-        Ein ggfs altes Target wird gelöscht
-        OpenWRT wird ins Target exportiert (kopiert)
-        Eine OpenWRT Feed-Config wird mit dem lokalen Source Verzeichnis als Quelle angelegt
-        Die Feeds werden geladen
-        Spezielle Auswahl an Paketen wird geladen
-        Patches werden angewandt
-        board\_prepare wird aufgerufen (wird. z.B. für Patches für eine bestimmte HW verwendet)
-
-    Was passiert beim build
-        prebuild
-        make im OpenWRT
-        postbuild
-        
-
-    Was kann man mit config machen?
-
+\begin{frame}{Was macht das Buildscript?}
+    \begin{itemize}
+        \item Das BSP file wird als dot Script eingeladen
+        \item Generiert dynamisches sed-Script
+        \begin{itemize}
+            \item[$\rightarrow$] Templates mit richtigen Werten zu füllen
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
-Wie funktioniert das innen drinne .. sourcen werden geladen etc ..
+\begin{frame}{Was passiert beim prepare?}
+    \begin{itemize}
+        \item Sourcen Downloaden
+        \begin{itemize}
+            \item[$\rightarrow$] separater Source Folder
+            \item OpenWRT
+            \item Sämtliche Packages
+            \begin{itemize}
+                \item[$\rightarrow$] ggfs werden Patches angewandt
+            \end{itemize}
+        \end{itemize}
+        \item Ein ggfs altes Target wird gelöscht
+        \item OpenWRT wird ins Target exportiert (kopiert)
+        \item Eine OpenWRT Feed-Config wird mit dem lokalen Source Verzeichnis als Quelle angelegt
+        \item Die Feeds werden geladen
+        \item Spezielle Auswahl an Paketen wird geladen
+        \item Patches werden angewandt
+        \item board\_prepare wird aufgerufen (wird. z.B. für Patches für eine bestimmte HW verwendet)
+    \end{itemize}
+\end{frame}
 
-wann werden patches gemacht
+\begin{frame}{Was passiert beim build?}
+    \begin{itemize}
+        \item prebuild
+        \begin{itemize}
+            \item \$target/files aufräumen
+            \item Files aus default-bsp und bsp kopieren
+            \item OpenWRT- und Kernel-Config kopieren
+            \item board\_prebuild
+            \item Templates transformieren
+            \item Versionen speichern: \$target/files/etc/firmware\_release
+        \end{itemize}
+        \item OpenWRT: make
+        \item postbuild
+        \begin{itemize}
+            \item board\_postbuild
+        \end{itemize}
+    \end{itemize}
+\end{frame}
 
-wann wird die config kopiert
+\begin{frame}{Config Targets?}
+    \begin{itemize}
+        \item
+    \end{itemize}
+\end{frame}
 
-was ist ein bsp
-
-wie bau ich ein bsp
-
-was wird sich in 0.5.0 ändern? <- neue bsps
+%was wird sich in 0.5.0 ändern? <- neue bsps
+%--> ausblick
