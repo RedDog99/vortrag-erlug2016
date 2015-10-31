@@ -11,6 +11,8 @@
         \item Nodewatcher
         \begin{itemize}
             \item Generiert Status-Daten
+            \item XML
+            \item alle 5 Minuten
         \end{itemize}
         \item Configurator
         \begin{itemize}
@@ -19,6 +21,8 @@
         \item Crawler
         \begin{itemize}
             \item Sammelt Status-Daten
+            \item Download über http Schnittstelle der Knoten
+            \item Alles über Link-Local
         \end{itemize}
         \item Netmon
         \begin{itemize}
@@ -27,50 +31,9 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Nodewatcher}
+\begin{frame}{Monitoring}
     \begin{itemize}
-        \item Erzeugt XML Datei
-        \item Läuft alle 5 Minuten auf den Knoten
-        \item node.data über Webinterface downloadbar
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Configurator}
-    \begin{itemize}
-        \item Knoten kennt Netmon's Link-Local Adresse
-        \item Knoten meldet alle 5 Minuten seine MAC Adresse ans Netmon
-        \item Netmon meldet dabei zurück, dass der Knoten noch nicht eingetragen wurde
-        \item Benutzer ,,übernimmt'' Knoten im Netmon
-        \item (Benutzer gibt dem Knoten einen Namen)
-        \item Knoten meldet wieder seine MAC an Netmon
-        \item Netmon meldet router\_id, update\_hash und api\_key zurück
-        \item Knoten trägt seine Link-Local Adresse im Netmon ein
-        \item Netmon pollt einmal alle 10 Minuten nach Router-Daten
-        \item Knoten pollt alle 5 Minuten nach seinem Hostname
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Crawler}
-    \begin{block}{Pollt alle Router jeweils alle 10 Minuten}
-        \begin{itemize}
-            \item Jeweils 20 Knoten nacheinander
-            \item Ping (mit PsExecute für Timeout)
-            \begin{itemize}
-                \item Bohrt neigh Tabelle auf
-                \item Eliminiert initial Timeout
-            \end{itemize}
-            \item curl'ed node.data
-            \item Dekodiert xml
-            \item Füllt MySQL Tabellen
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}{Netmon}
-    \begin{itemize}
-        \item Wie sieht Netmon aus?
-        \begin{itemize}
-            \item[$\rightarrow$] \url{http://netmon.freifunk-franken.de}
-        \end{itemize}
+        \item Alfred
+        \item todo Bild alfred masters auf jedem GW
     \end{itemize}
 \end{frame}
