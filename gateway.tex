@@ -4,209 +4,25 @@
 %Verfügung. Auch die Installation dieser Gateways sollen daher Teil
 %des Vortrags sein.
 
-\begin{frame}{Gateway}
-    \begin{block}{Aktueller Zustand}
-        \begin{itemize}
-            \item Gateway in Rumänien
-            \begin{itemize}
-                \item[$\rightarrow$] Direkt Internet
-            \end{itemize}
-            \item Gateway in Nürnberg
-            \begin{itemize}
-                \item[$\rightarrow$] OpenVPN über Berlin
-            \end{itemize}
-        \end{itemize}
-    \end{block}
-
-    $\longrightarrow$ Das Beispiel hier stammt vom Gateway in Nürnberg
-\end{frame}
-
-\begin{frame}{Gateway}
-    \begin{block}{Voraussetzungen}
-        \begin{itemize}
-            \item Server (kein Spielzeug; also kein Pi)
-            \item Richtiges Betriebssystem (z.B. ein Debian)
-            \item Policy Based Routing
-            \item DHCP- DNS-Server
-            \item batman + fastd (fff\_fuerth\_fastd.sh)
-            \item Lokale Netz Konfiguration
-            \item Freifunk-VPN (z.B. ip-ip)
-            \item olsr
-            \item Ein Tunnel um Traffic ab zu werfen\\
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}{Gateway}
-    \begin{block}{Setup}
-        \begin{itemize}
-            \item IP Bereich
-            \item .. was soll er tun? .. kurz Wiki durch gehen
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
+\begin{frame}{Was macht ein Gateway?}
     \begin{itemize}
-        \item Policy Based Routing
-        \item Trennung der Routing Tabellen
+        \item VPN
+        \item DHCP
+        \item DNS
+        \item Policy base routing
+        \item Routing zu anderen Gateways
+        \item Optional Routing ins Internet
     \end{itemize}
-
-    \begin{block}{/etc/iproute2/rt\_tables:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            10 fff
-        \end{lstlisting}
-    \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/default/isc-dhcp-server:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            INTERFACES="bat1"
-        \end{lstlisting}
-    \end{block}
-
-    \begin{block}{/etc/dhcp/dhcpd.conf:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            option domain-name "freifunk-franken.de";
-            option domain-name-servers 10.50.16.1;
-            authoritative;
-            # fuerth
-            subnet 10.50.32.0 netmask 255.255.248.0 {
-                range 10.50.35.0 10.50.36.255;
-                option routers 10.50.32.2;
-                option domain-name-servers 10.50.32.2;
-            }
-        \end{lstlisting}
-    \end{block}
+\begin{frame}{Internet Traffic}
+    Aufteilung von Gateways in Hood-Server und Gateways.
 \end{frame}
 
-\begin{frame}[fragile]{Gateway}
+\begin{frame}{DNS}
     \begin{itemize}
         \item Bind
-        \item Namesauflösung für Internet-Anfragen
+        \item fff.community
     \end{itemize}
-
-    \begin{block}{/etc/bind/named.conf.options:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            //listen-on-v6 { any; };
-            allow-recursion { 10.50.0.0/16; };
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-
-\begin{frame}[fragile]{Gateway}
-    \begin{itemize}
-        \item batman-adv-2013.4.0
-        \item batctl-2013.4.0
-        \item[$\rightarrow$] ./configure \&\& make install
-    \end{itemize}
-
-    \begin{block}{/etc/modules:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            batman-adv
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/default/fastd:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            AUTOSTART="none"
-        \end{lstlisting}
-    \end{block}
-    \begin{block}{/etc/fff\_fuerth\_fastd.sh:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            %todo!
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/network/interfaces:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            auto ffffuerthVPN
-            iface ffffuerthVPN inet manual
-                post-up /usr/local/sbin/batctl -m bat1 if add $IFACE
-                post-up ifconfig $IFACE up
-                post-up ifup bat1
-                post-down ifdown bat1
-                post-down ifconfig $IFACE down
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/network/interfaces:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            auto bat1
-            iface bat1 inet manual
-                post-up ifconfig $IFACE up
-                post-up ip addr add 10.50.32.2/21 dev $IFACE
-                post-up ip rule add iif $IFACE table fff
-                post-up ip rule add from 10.50.32.0/21 table fff
-                post-up ip rule add to 10.50.32.0/21 table fff
-                post-up ip route add 10.50.32.0/21 dev $IFACE table fff
-                post-up invoke-rc.d isc-dhcp-server restart
-                post-down ip route del 10.50.32.0/21 dev $IFACE table fff
-                post-down ip rule del from 10.50.32.0/21 table fff
-                post-down ip rule del to 10.50.32.0/21 table fff
-                post-down ip rule del iif $IFACE table fff
-                post-down ifconfig $IFACE down
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/network/interfaces:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            auto ro1
-            iface ro1 inet static
-                address 192.168.230.2
-                pre-up iptunnel add ro1 mode gre \
-                        local 193.192.41.129 \
-                        remote 109.163.229.254 ttl 255
-                up ifconfig ro1 multicast
-                pointopoint 192.168.230.1
-                post-down iptunnel del ro1
-        \end{lstlisting}
-    \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Gateway}
-    \begin{block}{/etc/olsrd/olsrd.conf:}
-        \scriptsize
-        \begin{lstlisting}[gobble=12]
-            Interface "ro1" {
-                Ip4Broadcast 255.255.255.255
-                LinkQualityMult 192.168.230.2 0.5
-            }
-
-            Hna4 {
-                10.50.32.0 255.255.248.0
-            }
-
-            LoadPlugin "olsrd_httpinfo.so.0.1" {
-                   PlParam "Port" "8080"
-                   PlParam "Net" "0.0.0.0 0.0.0.0"
-            }
-
-            RtProto 8
-            RtTable 10
-            RtTableDefault 10
-            RtTableTunnel 10
-        \end{lstlisting}
-    \end{block}
 \end{frame}
 
