@@ -54,24 +54,13 @@
     Internet verbunden. Hood C hat einen lokalen Router, der direkt am LAN-Port hängt.
 \end{frame}
 
-\begin{frame}{\alt<1>{fastdstart.sh}{\$project\_\$hood\_fastd.sh}}
+\begin{frame}{Fastdstart.sh}
     \begin{itemize}
-        \item \only<1>{Testet Internet-Connectivität}
-        \item Legt fastd Konfiguration
-            /etc/fastd/\$project\only<2>{.\$hood}/ \only<1>{im tmpfs} an:
-            \footnote{\$project ist bei uns immer ,,fff''.}
-            \begin{itemize}
-                \item \$project.conf
-                \item up.sh
-                \item down.sh
-                \item peers/
-            \end{itemize}
-        \item Erzeugt Pub/Priv-Keypaar
+        \item Legt config von fastd sowie up/down scripts an
         \item Startet fastd
         \item Meldet sich beim VPN-KeyXchange an
         \item Lädt Liste mit Peers
         \item Refresht fastd
-        \item \only<2>{Löscht verwaiste Peers}
     \end{itemize}
 \end{frame}
 
