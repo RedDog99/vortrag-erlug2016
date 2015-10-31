@@ -76,85 +76,12 @@
 \end{frame}
 
 \begin{frame}{VPN-KeyXchange}
-    \only<1>{
-        \begin{block}{HTTP Schnittstelle}
-            \texttt{\tiny
-                http://mastersword.de/\textasciitilde{}reddog/\$project/?mac=\$mac\&name=\$hostname\&port=\$port\&key=\$pubkey
-            }
-        \end{block}
-
-        \begin{block}{Rückmeldung}
-            \texttt{\tiny
-                \#\#\#\#romauplink.conf\\
-                \#name "romauplink";\\
-                key "9a8ee8b797eed5d3b06778c47fe670987a0eda791ca557da56e6198be45f24c6";\\
-                remote ipv4 "109.163.229.254" port 10000 float;\\[2ex]
-                \#\#\#\#fff.conf\\
-                \#name "fff";\\
-                key "543ebc33b36210b10edf62fdb560e3ceac6c64b4ed9ad852f39954522934cd8a";\\
-                remote ipv4 "192.168.30.23" port 10000 float;\\[2ex]
-                \#\#\#\#90F652F45C34.conf\\
-                \#name "ChamHH8Dachboden1";\\
-                key "d0e4900fae535d189ef070a527dd00ce2688f3ff7f2b31c4f2846cb658b855fb";\\
-                remote ipv4 "93.194.173.193" port 10000 float;\\
-            }
-        \end{block}
-    }
-    \only<2>{
+    \begin{itemize}
+        \item Knoten Identifizierung über MAC, alternativ über Name
+        \item Jeweils pro hood:
         \begin{itemize}
-            \item Knoten Identifizierung über MAC, alternativ über Name
-            \item Jeweils pro hood:
-            \begin{itemize}
-                \item Clients bekommen eine Liste aller Gateways
-                \item Gateways bekommen eine Liste aller Clients+Gateways
-            \end{itemize}
+            \item Clients bekommen eine Liste aller Gateways
+            \item Gateways bekommen eine Liste aller Clients+Gateways
         \end{itemize}
-    }
-    \only<3-7>{
-        \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-            ID & mac & name & key & ip & port & gw & hood \\ \hline
-            0 & & roup & abc & 254 & 10000 & true & 1 \\ \hline
-            1 & & roup.fuerth & abd & 254 & 10001 & true & 2 \\ \hline
-            2 & & nue1.fuerth & abe & 129 & 10001 & true & 2 \\ \hline
-            3 & ab: & default-1 & abf & 1 & 10000 & false & 1 \\ \hline
-            4 & cd: & default-2 & aca & 2 & 10000 & false & 1 \\ \hline
-            5 & ef: & fuerth-1 & acb & 3 & 10000 & false & 2 \\ \hline
-        \end{tabular}
-
-        \only<4,5>{
-            \begin{block}{?mac=ab:\&name=default-1\&..}
-                \alt<4>{
-                    SELECT ID,gw,hood FROM nodes WHERE mac = \$mac;\\
-                    if (gw)\\
-                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood\\
-                    else\\
-                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood \& gw=true\\
-                }{
-                    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-                        ID & mac & name & key & ip & port & gw & hood \\ \hline
-                        0 & & roup & abc & 254 & 10000 & true & 1 \\ \hline
-                    \end{tabular}
-                }
-            \end{block}
-        }
-        \only<6,7>{
-            \begin{block}{?mac=\&name=nue1.fuerth\&..}
-                \alt<6>{
-                    SELECT ID,gw,hood FROM nodes WHERE name = \$name;\\
-                    if (gw)\\
-                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood\\
-                    else\\
-                    \hspace{1cm}SELECT * FROM nodes WHERE hood=\$hood \& gw=true\\
-                }{
-                    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-                        ID & mac & name & key & ip & port & gw & hood \\ \hline
-                        1 & & roup.fuerth & abd & 254 & 10001 & true & 2 \\ \hline
-                        2 & & nue1.fuerth & abe & 129 & 10001 & true & 2 \\ \hline
-                        5 & ef: & fuerth-1 & acb & 3 & 10000 & false & 2 \\ \hline
-                    \end{tabular}
-
-                }
-            \end{block}
-        }
-    }
+    \end{itemize}
 \end{frame}
