@@ -1,0 +1,56 @@
+\section{Stand von heute}
+
+\begin{frame}{Fastdstart.sh}
+    \begin{itemize}
+        \item Legt config von fastd sowie up/down scripts an
+        \item Startet fastd
+        \item Meldet sich beim VPN-KeyXchange an
+        \item Lädt Liste mit Peers
+        \item Refresht fastd
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{VPN-KeyXchange}
+    \begin{itemize}
+        \item Knoten Identifizierung über MAC, alternativ über Name
+        \item Aufteilung in ,,hood''s:
+        \begin{itemize}
+            \item Stellt ein Layer-II Netz dar
+            \item Ein Gateway kann mehrere Layer-II Netze bedienen
+        \end{itemize}
+        \item Jeweils pro hood:
+        \begin{itemize}
+            \item Clients bekommen eine Liste aller Gateways
+            \item Gateways bekommen eine Liste aller Clients+Gateways
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Internet Traffic}
+    Aufteilung von Gateways in Hood-Server und Gateways.
+\end{frame}
+
+\begin{frame}{Netmon}
+    \begin{itemize}
+        \item Nodewatcher
+        \begin{itemize}
+            \item Generiert Status-Daten
+            \item XML
+            \item alle 5 Minuten
+        \end{itemize}
+        \item Configurator
+        \begin{itemize}
+            \item Verknüpft Netmon und Knoten
+        \end{itemize}
+        \item Crawler
+        \begin{itemize}
+            \item Sammelt Status-Daten
+            \item Download über http Schnittstelle der Knoten
+            \item Alles über Link-Local
+        \end{itemize}
+        \item Netmon
+        \begin{itemize}
+            \item Visualisiert Status-Daten
+        \end{itemize}
+    \end{itemize}
+\end{frame}
