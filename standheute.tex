@@ -1,17 +1,48 @@
 \section{Stand von heute}
 
-\begin{frame}{Fastdstart.sh}
+\begin{frame}{Freifunk Knoten}
     \begin{itemize}
-        \item Legt config von fastd sowie up/down scripts an
-        \item Startet fastd
-        \item Meldet sich beim VPN-KeyXchange an
-        \item Lädt Liste mit Peers
-        \item Refresht fastd
+        \item Kein Webinterface
+        \item Nur SSH Zugang
+        \item Hat nur eine Link-Local IPv6 Adresse
+    \end{itemize}
+
+    todo Hier muss noch mehr Inhalt her!
+\end{frame}
+
+\begin{frame}{Knoten VPN}
+    \begin{itemize}
+        \item Verwendetes VPN: fastd
+        \begin{itemize}
+            \item Multi-Client zu Multi-Client VPN
+            \item Kein internes Routing
+            \item Kein Forwarding
+            \item Layer-II Netz
+            \item Wir nutzen keine Verschlüsselung (! :-O)
+        \end{itemize}
+        \item Damit jeder jeden Erreichen kann nutzen wir Batman-Adv auf dem VPN
+        \begin{itemize}
+            \item Batman-Adv 2014 (!)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Knoten VPN}
+    \begin{itemize}
+        \item Fastdstart.sh
+        \begin{itemize}
+            \item Legt config von fastd sowie up/down scripts an
+            \item Startet fastd
+            \item Meldet sich beim VPN-KeyXchange an
+            \item Lädt Liste mit Peers
+            \item Refresht fastd
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{VPN-KeyXchange}
     \begin{itemize}
+        \item Zentrale Webseite
         \item Knoten Identifizierung über MAC, alternativ über Name
         \item Aufteilung in ,,hood''s:
         \begin{itemize}
@@ -23,11 +54,55 @@
             \item Clients bekommen eine Liste aller Gateways
             \item Gateways bekommen eine Liste aller Clients+Gateways
         \end{itemize}
+        \item Standort des Routers wird im Netmon anhand der MAC ermittelt
+        \item Die Hood, welche am nächsten dran ist (voronoi) wird zugewiesen
+        \item Problem: Abhängigkeit vom Netmon
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{VPN Server}
+    In jeder Hood gibt es mehrere davon
+    \begin{itemize}
+        \item VPN Server
+        \begin{itemize}
+            \item Je Hood eine Instanz
+        \end{itemize}
+        \item Hoodzuweisung manuell im KeyXchange
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gateways}
+    todo Läuft meist auf einem VPN Server
+
+    todo Bis hierhin war alles Layer II.
+
+    \begin{itemize}
+        \item DHCP
+        \item Aktuell ausschließlich IPv4
+        \begin{itemize}
+            \item Ungleiche Server Auslastung durch schlechtes DHCP Timing
+            \item Batman-Adv GW Selection
+        \end{itemize}
+        \item DNS
+        \item Policy base routing
+        \item VPN (GRE) Tunnel zu anderen Gateways
+        \item OLSR
+        \begin{itemize}
+            \item Routing zu anderen Gateways
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Internet Traffic}
-    Aufteilung von Gateways in Hood-Server und Gateways.
+    todo Aufteilung von Gateways in Hood-Server und Gateways.
+    \begin{itemize}
+        \item OLSR
+        \item Dynamic Gateway Plugin
+        \begin{itemize}
+            \item Optional Routing ins Internet
+            \item Problem: Ungleiche Server Auslastung durch gleichbeidene Routen-Qualität
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Netmon}
@@ -52,5 +127,51 @@
         \begin{itemize}
             \item Visualisiert Status-Daten
         \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Monitoring}
+    \begin{itemize}
+        \item Alfred
+        \begin{itemize}
+            \item XML
+            \item alle 5 Minuten
+            \item Multicast
+        \end{itemize}
+        \item Multicast Daten können auf mehreren Gateways gelesen werden
+        \item Die Daten können von dort an eine zentrale Webseite (Karte, Etc) geschickt werden
+        \item Standort und Ansprechpartner wird aus dem Netmon geladen
+        \item Problem: Abhängig vom Netmon
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Domain-Name-System}
+    \begin{itemize}
+        \item ganz Neu.. ! :-)
+        \item Bisher: Nur für Namensauflösung ins Internet
+        \item fff.community
+        \item Mehrere DNS Server
+        \item Synchronisation über dig Script
+        \begin{itemize}
+            \item todo Näher beschreiben
+        \end{itemize}
+        \item todo
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Firmware Bau}
+    \begin{itemize}
+        \item Zentrales "files" Verzeichnis
+        \item Pro System ein .config und mache überschreibende "files"
+        \item Template System für Communities
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Zusammenfasssung}
+    \begin{itemize}
+        \item Erfolgreich das L2 Netz in mehrere L3 Netze geteilt
+        \item VPN Schlüsseltausch über zentrales Tool
+        \item Zuordnung zu Hood über Standort aus Netmon
+        \item todo
     \end{itemize}
 \end{frame}
