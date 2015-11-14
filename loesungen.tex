@@ -1,0 +1,86 @@
+\section{Mögliche Lösungen}
+
+\begin{frame}{Größten Baustellen}
+    Meiner Meinung nach haben wir folgende größere (längerfristige)
+    Baustellen:
+    \begin{itemize}
+        \item Netmon soll weg
+        \item KeyXchange soll dezentralisiert werden
+        \item Funk Verbindungen zwischen Hoods
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Monitoring}
+    \begin{itemize}
+        \item Position und Owner Daten vom Gerät
+        \item Webinterface nötig
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Webinterface}
+    \begin{itemize}
+        \item \zb{} mit todo Tool von Bielefeld
+        \item Koordinaten setzen
+            \begin{itemize}
+                \item wie offline setzen?
+            \end{itemize}
+        \item Kontakt-Daten
+        \item Kein "GUI" Browser kann ordentlich mit IPv6 Link-Local
+            umgehen
+        \item Knoten müssen eine IP bekommen
+        \item DHCP IP wäre immer anders, wie Router finden?
+        \item Dynamic DNS: MAC.node.fff.community
+            \begin{itemize}
+                \item Muss schnell gehen -> DHCP setzt das Dynamic DNS
+                \item Wie mit offline knoten verfahren?
+            \end{itemize}
+        \item Jeder Knoten hat die selbe IP
+%            Wenn wir eh eine DHCP IPv4 Adresse bekommen, dann können
+%            wir doch
+%            eigentlich dazu immer die "Netzadresse + 127" als IP
+%            hinzufügen und
+%            sämtliche Kommunikation ins Mesh zu/von der IP weg filtern.
+%            Dann hätten wir eine Local-Node Implementierung die immer
+%            in der eigenen
+%            Hood gilt
+        \item IP im Monitoring nachschlagen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{KeyXchange dezentralisieren}
+    \begin{itemize}
+        \item Der Knoten soll selber die richtige Hood finden
+        \item Welcher VPN Server muss angewählt werden?
+        \begin{itemize}
+            \item VPN Server müssten alle Verbindungen annehmen (kein
+                Problem mit fastd)
+        \end{itemize}
+        \item Welche Wifi Settings müssen gewählt werden? (wenn z.B.
+            kein VPN da ist?)
+        \item Zwei Dinge werden benötigt: 
+        \begin{itemize}
+            \item Hood-Configs enthalten VPN Server
+            \item Scanner kann nach anderen Hoods (auch unbekannten)
+                suchen, kompatibilität prüfen und sich einwählen
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hood-Configs zum Gerät bringen}
+    \begin{itemize}
+        \item todo
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Neue Hoods erzeugen}
+    \begin{itemize}
+        \item todo
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{L3 Richtfunk}
+    \begin{itemize}
+        \item todo
+    \end{itemize}
+\end{frame}
+
