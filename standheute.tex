@@ -2,88 +2,60 @@
 
 \begin{frame}{Freifunk Knoten}
     \begin{itemize}
-        \item Kein Webinterface
-        \item Nur SSH Zugang
+        \item Ziel: Ohne Konfiguration
+        \begin{itemize}
+            \item Keine DHCP Ranges
+            \item LAN Ports vorkonfiguriert
+            \item Ausnahme: Passwort für root Login
+        \end{itemize}
         \item Hat nur eine Link-Local IPv6 Adresse
+        \item Nur SSH Zugang
+        \begin{itemize}
+            \item[$\rightarrow$] Kein Webinterface
+        \end{itemize}
+        \item Batman-Adv 2013 (!)
     \end{itemize}
-
-    todo Hier muss noch mehr Inhalt her!
 \end{frame}
 
 \begin{frame}{Knoten VPN}
     \begin{itemize}
         \item Verwendetes VPN: fastd
-        \begin{itemize}
-            \item Multi-Client zu Multi-Client VPN
-            \item Kein internes Routing
-            \item Kein Forwarding
-            \item Layer-II Netz
-            \item Wir nutzen keine Verschlüsselung (! :-O)
-        \end{itemize}
-        \item Damit jeder jeden Erreichen kann nutzen wir Batman-Adv auf dem VPN
-        \begin{itemize}
-            \item Batman-Adv 2014 (!)
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Knoten VPN}
-    \begin{itemize}
-        \item Fastdstart.sh
-        \begin{itemize}
-            \item Legt config von fastd sowie up/down scripts an
-            \item Startet fastd
-            \item Meldet sich beim VPN-KeyXchange an
-            \item Lädt Liste mit Peers
-            \item Refresht fastd
-        \end{itemize}
+        \item Wir nutzen keine Verschlüsselung (! :-O)
+        \item Script zum Austausch der VPN Peers über den KeyXchange
     \end{itemize}
 \end{frame}
 
 \begin{frame}{VPN-KeyXchange}
     \begin{itemize}
         \item Zentrale Webseite
+        \item Knoten meldet sich beim VPN-KeyXchange an
+        \item Knoten lädt Liste mit Peers
         \item Knoten Identifizierung über MAC, alternativ über Name
-        \item Aufteilung in ,,hood''s:
+        \item<2> Aufteilung in ,,hood''s:
         \begin{itemize}
-            \item Stellt ein Layer-II Netz dar
-            \item Ein Gateway kann mehrere Layer-II Netze bedienen
+            \item Die Hood, welche am nächsten dran ist (voronoi) wird zugewiesen
+            \begin{itemize}
+                \item Standort des Routers wird im Netmon anhand der MAC ermittelt
+                \item Problem: Abhängigkeit vom Netmon
+            \end{itemize}
+            \item Clients bekommen eine Liste aller Server
+            \item Server bekommen eine Liste aller Clients+Server
         \end{itemize}
-        \item Jeweils pro hood:
-        \begin{itemize}
-            \item Clients bekommen eine Liste aller Gateways
-            \item Gateways bekommen eine Liste aller Clients+Gateways
-        \end{itemize}
-        \item Standort des Routers wird im Netmon anhand der MAC ermittelt
-        \item Die Hood, welche am nächsten dran ist (voronoi) wird zugewiesen
-        \item Problem: Abhängigkeit vom Netmon
+        \item<2> Problem: Funk Verbindung zwischen den Hoods
     \end{itemize}
 \end{frame}
 
 \begin{frame}{VPN Server}
-    In jeder Hood gibt es mehrere davon
     \begin{itemize}
-        \item VPN Server
-        \begin{itemize}
-            \item Je Hood eine Instanz
-        \end{itemize}
+        \item VPN Server: In jeder Hood gibt es mehrere davon
         \item Hoodzuweisung manuell im KeyXchange
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Gateways}
-    todo Läuft meist auf einem VPN Server
-
-    todo Bis hierhin war alles Layer II.
-
-    \begin{itemize}
         \item DHCP
-        \item Aktuell ausschließlich IPv4
         \begin{itemize}
+            \item Aktuell ausschließlich IPv4
             \item Ungleiche Server Auslastung durch schlechtes DHCP Timing
             \item Batman-Adv GW Selection
         \end{itemize}
-        \item DNS
+        \item DNS Namesauflösung
         \item Policy base routing
         \item VPN (GRE) Tunnel zu anderen Gateways
         \item OLSR
@@ -93,14 +65,15 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Internet Traffic}
-    todo Aufteilung von Gateways in Hood-Server und Gateways.
+\begin{frame}{Gateways}
     \begin{itemize}
-        \item OLSR
-        \item Dynamic Gateway Plugin
+        \item Verbindet Freifunk und Internet
+        \item IPv4 NAT (oft übers Ausland) ins Internet
+        \item Announced 0.0.0.0/0 via OLSR
         \begin{itemize}
-            \item Optional Routing ins Internet
-            \item Problem: Ungleiche Server Auslastung durch gleichbeidene Routen-Qualität
+            \item Dynamic Gateway Plugin
+            \item VPN Server können diese Routen nutzen
+            \item Problem: Ungleiche Server Auslastung durch statische Routen-Qualität
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -122,10 +95,14 @@
             \item Sammelt Status-Daten
             \item Download über http Schnittstelle der Knoten
             \item Alles über Link-Local
+            \begin{itemize}
+                \item Muss in jeder Hood drin sein
+            \end{itemize}
         \end{itemize}
         \item Netmon
         \begin{itemize}
             \item Visualisiert Status-Daten
+            \item Mit den vielen Crawls hoffnungslos überfordert
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -148,22 +125,29 @@
 \begin{frame}{Domain-Name-System}
     \begin{itemize}
         \item ganz Neu.. ! :-)
-        \item Bisher: Nur für Namensauflösung ins Internet
         \item fff.community
-        \item Mehrere DNS Server
-        \item Synchronisation über dig Script
         \begin{itemize}
-            \item todo Näher beschreiben
+            \item Langer Name, aber
+            \item Keine Kollision
         \end{itemize}
-        \item todo
+        \item Mehrere DNS Server
+        \item Zonen-Synchronisation über dig axfr
+        \item Subdelegation an synchronisierte Hosts möglich
+        \item Noch keine reverse delegation
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Firmware Bau}
     \begin{itemize}
+        \item Basiert auf OpenWRT
+        \item "Eigenes" Framework (Buildscript)
         \item Zentrales "files" Verzeichnis
-        \item Pro System ein .config und mache überschreibende "files"
-        \item Template System für Communities
+        \item Board-Support-Packages
+        \begin{itemize}
+            \item Ein .config
+            \item Überschreibende "files"
+        \end{itemize}
+        \item Template System für versch. Communities
     \end{itemize}
 \end{frame}
 
@@ -171,7 +155,18 @@
     \begin{itemize}
         \item Erfolgreich das L2 Netz in mehrere L3 Netze geteilt
         \item VPN Schlüsseltausch über zentrales Tool
-        \item Zuordnung zu Hood über Standort aus Netmon
-        \item todo
+        \begin{itemize}
+            \item Zuordnung zu Hood über Standort aus Netmon
+            \item Manuelle Zuweisung der VPN Server
+            \item Keine Anpassung an Firmware
+            \begin{itemize}
+                \item Fehlerhafte Verbindung (loop) der Hoods durch versehentliches Meshing
+            \end{itemize}
+        \end{itemize}
+        \item Kein Traffic Balancing zwischen VPN Server und Gateways
+        \item Netmon überlastet
+        \item Netmon muss zu jeder Hood eine L2 Verbindung haben
+        \item Neues Monitoring kennt Knoten Standort nur über Netmon
+        \item Keine Möglichkeit die L2 Netze per Richtfunk zu verbinden
     \end{itemize}
 \end{frame}
