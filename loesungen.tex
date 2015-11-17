@@ -1,8 +1,7 @@
 \section{Mögliche Lösungen}
 
 \begin{frame}{Größten Baustellen}
-    Meiner Meinung nach haben wir folgende größere (längerfristige)
-    Baustellen:
+    Größere (längerfristige) Baustellen:
     \begin{itemize}
         \item Netmon soll weg
         \item KeyXchange soll dezentralisiert werden
@@ -12,6 +11,11 @@
 
 \begin{frame}{Monitoring}
     \begin{itemize}
+        \item Netmon abschalten, Abhängigkeiten lösen
+        \begin{itemize}
+            \item keyXchange
+            \item neues Monitoring
+        \end{itemize}
         \item Position und Owner Daten vom Gerät
         \item Webinterface nötig
     \end{itemize}
@@ -19,31 +23,42 @@
 
 \begin{frame}{Webinterface}
     \begin{itemize}
-        \item \zb{} mit todo Tool von Bielefeld
-        \item Koordinaten setzen
+        \item \zb{} mit haserl (Freifunk Bielefeld)
+        \item \zb{} mit lua (OpenWRT)
+        \item Parameter setzen
+        \begin{itemize}
+            \item Koordinaten setzen
+                \begin{itemize}
+                    \item Lösung gesucht: Kartenansich ohne Netz?
+                \end{itemize}
+            \item Kontakt-Daten
+        \end{itemize}
+        \item Problem: ''GUI'' Browser und IPv6 Link-Local
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{IP für Knoten}
+    \begin{itemize}
+        \item Knoten müssen eine normale IP bekommen
+        \item DHCP IP immer anders $\rightarrow$ wie Router finden?
+        \begin{itemize}
+            \item Dynamic DNS: MAC.node.fff.community
             \begin{itemize}
-                \item wie offline setzen?
+                \item Muss schnell gehen $\rightarrow$ DHCP setzt das Dynamic DNS
+                \item Problem: offline Knoten
             \end{itemize}
-        \item Kontakt-Daten
-        \item Kein "GUI" Browser kann ordentlich mit IPv6 Link-Local
-            umgehen
-        \item Knoten müssen eine IP bekommen
-        \item DHCP IP wäre immer anders, wie Router finden?
-        \item Dynamic DNS: MAC.node.fff.community
+            \item Local-Node IP:
             \begin{itemize}
-                \item Muss schnell gehen -> DHCP setzt das Dynamic DNS
-                \item Wie mit offline knoten verfahren?
+                \item Jeder Knoten hat die selbe IP
+                \item Beispiel: Vom DHCP zugewiesene Netzadresse +127
+                \item Local-Node IP wird nicht ins Mesh geroutet
+                \item Problem: Geht nur bei größeren Netzen
             \end{itemize}
-        \item Jeder Knoten hat die selbe IP
-%            Wenn wir eh eine DHCP IPv4 Adresse bekommen, dann können
-%            wir doch
-%            eigentlich dazu immer die "Netzadresse + 127" als IP
-%            hinzufügen und
-%            sämtliche Kommunikation ins Mesh zu/von der IP weg filtern.
-%            Dann hätten wir eine Local-Node Implementierung die immer
-%            in der eigenen
-%            Hood gilt
-        \item IP im Monitoring nachschlagen
+            \item IP im Monitoring nachschlagen
+            \begin{itemize}
+                \item Problem: offline Knoten
+            \end{itemize}
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
