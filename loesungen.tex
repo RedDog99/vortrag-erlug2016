@@ -62,41 +62,76 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{KeyXchange dezentralisieren}
+\begin{frame}{KeyXchange}
     \begin{itemize}
-        \item Der Knoten soll selber die richtige Hood finden
-        \item Welcher VPN Server muss angewählt werden?
+        \item Dezentralisieren: Knoten soll selber seine Hood finden
         \begin{itemize}
-            \item VPN Server müssten alle Verbindungen annehmen (kein
-                Problem mit fastd)
+            \item VPN Server auswählen
+            \item VPN Server alle Verbindungen akzeptieren
         \end{itemize}
-        \item Welche Wifi Settings müssen gewählt werden? (wenn z.B.
-            kein VPN da ist?)
+        \item Wifi Settings auswählen
+        \begin{itemize}
+            \item Problem: wenn z.B. kein VPN da ist?
+        \end{itemize}
         \item Zwei Dinge werden benötigt: 
         \begin{itemize}
-            \item Hood-Configs enthalten VPN Server
-            \item Scanner kann nach anderen Hoods (auch unbekannten)
-                suchen, kompatibilität prüfen und sich einwählen
+            \item Mögliche VPN Server
+            \item Daten der Hood (Wifi / Routing / etc)
         \end{itemize}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Hood-Configs zum Gerät bringen}
-    \begin{itemize}
-        \item todo
-    \end{itemize}
+\begin{frame}{Hood-Configs}
+    \begin{columns}
+    \column{0.45\textwidth}
+        \begin{block}{Hood Config}
+            \footnotesize
+            [general]\\
+            version=1\\[1ex]
+            [hood]\\
+            name=fuerth\\
+            bssid=ca:ff:ee:ba:be:00\\
+            protocol=batman-adv-v14\\
+            channel2=1\\
+            mode2=ht20+\\
+            type=802.11s\\
+            location=49.4814;10.966\\
+            noAutoConnect=true\\[1ex]
+            [network]\\
+            subnet=10.16.44.0/27
+        \end{block}
+    \column{0.45\textwidth}
+        \begin{block}{Gateway Config}
+            \footnotesize
+            [general]\\
+            version=1\\[1ex]
+            [network]\\
+            hood=fuerth\\
+            ip4range=10.50.44.1-.46.255\\
+            //ip6range=2001:xx:xx:xx/64\\[1ex]
+            [vpn]\\
+            protocol=fastd\\
+            address=vpn1.fff.community\\
+            port=10000\\
+            key=$<$fastd-public-key$>$\\[1ex]
+            [sign]\\
+            key=$<$public-key$>$\\
+        \end{block}
+    \end{columns}
 \end{frame}
 
-\begin{frame}{Neue Hoods erzeugen}
+\begin{frame}{Hood-Configs verteilen}
     \begin{itemize}
-        \item todo
+        \item Gesucht: Synchronisation
+        \item Überschreiben und Löschen muss abgesichert sein.
+        \begin{itemize}
+            \item[$\rightarrow$] Synchronisation darf nur für gültig signierte Dateien erfolgen
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{L3 Richtfunk}
-    \includegraphics[width=0.75\textwidth]{img/dia/l3richtfunk.pdf}
-    \begin{itemize}
-        \item todo
-    \end{itemize}
+    \center
+    \includegraphics[width=0.9\textwidth]{img/dia/l3richtfunk.pdf}
 \end{frame}
 
