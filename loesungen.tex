@@ -64,6 +64,7 @@
                 \item Problem: offline Knoten
             \end{itemize}
         \end{itemize}
+        \item Local Node mit ebtables?
     \end{itemize}
 \end{frame}
 
@@ -128,9 +129,19 @@
 \begin{frame}{Hood-Configs verteilen}
     \begin{itemize}
         \item Gesucht: Synchronisation
-        \item Überschreiben und Löschen muss abgesichert sein.
+        \item Überschreiben/Löschen absichern
         \begin{itemize}
-            \item[$\rightarrow$] Synchronisation darf nur für gültig signierte Dateien erfolgen
+            \item[$\rightarrow$] Synchronisation nur mit Signatur
+        \end{itemize}
+        \item Offline Hood
+        \begin{itemize}
+            \item Mögliche Funkpartner finden
+            \item Wifi's suchen
+            \item[$\rightarrow$] Zwei Wifi's
+            \begin{itemize}
+                \item Mit Freifunk
+                \item Ohne Freifunk
+            \end{itemize}
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -140,3 +151,13 @@
     \includegraphics[width=0.9\textwidth]{img/dia/l3richtfunk.pdf}
 \end{frame}
 
+\begin{frame}{L3 Richtfunk}
+    \begin{itemize}
+        \item Batman Netz = Normales Ethernet
+        \item OLSR gegen unfung absichern $\rightarrow$ sOLSR (??)
+        \item Problem: Nur ein default Gateway pro Client
+        \begin{itemize}
+            \item[$\rightarrow$] Das Gateway vom Dach oder das hinter dem DSL?
+        \end{itemize}
+    \end{itemize}
+\end{frame}
