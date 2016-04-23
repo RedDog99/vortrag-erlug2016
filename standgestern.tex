@@ -1,0 +1,110 @@
+\section{Historie}
+\begin{frame}{}
+    \begin{center}
+        Als Ausschnitt:\\
+        Das Netz Anfang des Jahres
+     \end{center}
+\end{frame}
+
+\begin{frame}{Freifunk Knoten}
+    \begin{itemize}
+        \item Ziel: Ohne Konfiguration
+        \begin{itemize}
+            \item Keine DHCP Ranges
+            \item LAN Ports vorkonfiguriert
+            \item Ausnahme: Passwort für root Login
+        \end{itemize}
+        \item Hat nur eine Link-Local IPv6 Adresse
+        \item Batman-Adv 2013 (!)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Netmon}
+    \begin{itemize}
+        \item Nodewatcher
+        \begin{itemize}
+            \item Generiert Status-Daten
+            \item XML
+            \item alle 5 Minuten
+        \end{itemize}
+        \item Configurator
+        \begin{itemize}
+            \item Verknüpft Netmon und Knoten
+        \end{itemize}
+        \item Crawler
+        \begin{itemize}
+            \item Sammelt Status-Daten
+            \item Download über http Schnittstelle der Knoten
+            \item Alles über Link-Local
+            \begin{itemize}
+                \item Muss in jeder Hood drin sein
+            \end{itemize}
+        \end{itemize}
+        \item Netmon
+        \begin{itemize}
+            \item Visualisiert Status-Daten
+            \item Mit den vielen Crawls hoffnungslos überfordert
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Monitoring}
+    \begin{itemize}
+        \item Alfred
+        \begin{itemize}
+            \item XML
+            \item alle 5 Minuten
+            \item Multicast
+        \end{itemize}
+        \item Multicast Daten können auf mehreren Gateways gelesen werden
+        \item Die Daten können von dort an eine zentrale Webseite (Karte, etc.) geschickt werden
+        \item Standort und Ansprechpartner wird aus dem Netmon geladen
+        \item Problem: Abhängig vom Netmon
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Freifunk Knoten}
+    \begin{itemize}
+        \item Ziel: Ohne Konfiguration
+        \begin{itemize}
+            \item Keine DHCP Ranges
+            \item LAN Ports vorkonfiguriert
+            \item Ausnahme: Passwort für root Login
+        \end{itemize}
+        \item Hat nur eine Link-Local IPv6 Adresse
+        \item Nur SSH Zugang
+        \begin{itemize}
+            \item[$\rightarrow$] Kein Webinterface
+        \end{itemize}
+        \item Batman-Adv 2013 (!)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Firmware Bau}
+    \begin{itemize}
+        \item Basiert auf OpenWrt
+        \item ,,Eigenes'' Framework (Buildscript)
+        \item Zentrales ,,files'' Verzeichnis
+        \item Board-Support-Packages
+        \begin{itemize}
+            \item Ein .config
+            \item Überschreibende ,,files''
+        \end{itemize}
+        \item Template System für versch. Communities
+        \item Versionierung x.y.z
+        \begin{itemize}
+            \item x,y,z != major,minor,patch
+            \item Gesamtsystem: Zu viele API
+            \item Immer nur ein Nasenfaktor
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Zusammenfasssung}
+    \begin{itemize}
+        \item Netmon überlastet
+        \item Netmon muss zu jeder Hood eine L2 Verbindung haben
+        \item Neues Monitoring kennt Knoten Standort nur über Netmon
+        \item Keine Möglichkeit die L2 Netze per Richtfunk zu verbinden
+    \end{itemize}
+\end{frame}
