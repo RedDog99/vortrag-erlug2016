@@ -56,8 +56,8 @@
     \column{0.45\textwidth}
         \begin{block}{Hood Config}
             \footnotesize
-            [general]\\
-            version=1\\[1ex]
+            %[general]\\
+            %version=1\\[1ex]
             [hood]\\
             name=fuerth\\
             bssid=ca:ff:ee:ba:be:00\\
@@ -68,22 +68,25 @@
             location=49.4814;10.966\\
             noAutoConnect=true\\[1ex]
             [network]\\
-            subnet=10.16.44.0/27
+            prefix=fdff:1::
         \end{block}
     \column{0.45\textwidth}
         \begin{block}{Gateway Config}
             \footnotesize
-            [general]\\
-            version=1\\[1ex]
+            %[general]\\
+            %version=1\\[1ex]
             [network]\\
-            hood=fuerth\\
-            ip4range=10.50.44.1-.46.255\\
-            //ip6range=2001:xx:xx:xx/64\\[1ex]
+            hood=fuerth\\[1ex]
+            %ip4range=10.50.44.1-.46.255\\
+            %//ip6range=2001:xx:xx:xx/64\\[1ex]
             [vpn]\\
             protocol=fastd\\
             address=vpn1.fff.community\\
             port=10000\\
-            key=$<$fastd-public-key$>$\\[1ex]
+            %key=$<$fastd-public-key$>$\\[1ex]
+        \end{block}
+        \begin{block}{Key File}
+            \footnotesize
             [sign]\\
             key=$<$public-key$>$\\
         \end{block}
@@ -92,20 +95,20 @@
 
 \begin{frame}{Hood-Configs verteilen}
     \begin{itemize}
-        \item Gesucht: Synchronisation
+        \item Download über HTTP Server
+            \begin{itemize}
+                \item Immer noch zentral
+                \begin{itemize}
+                    \item[$\rightarrow$] .. später mal sync daemon?
+                \end{itemize}
+            \end{itemize}
         \item Überschreiben/Löschen absichern
         \begin{itemize}
             \item[$\rightarrow$] Synchronisation nur mit Signatur
         \end{itemize}
-        \item Offline Hood
+        \item Knoten ohne WAN
         \begin{itemize}
-            \item Mögliche Funkpartner finden
-            \item WiFi suchen
-            \item[$\rightarrow$] Zwei WiFi
-            \begin{itemize}
-                \item Mit Freifunk
-                \item Ohne Freifunk
-            \end{itemize}
+            \item Config Access-Point
         \end{itemize}
     \end{itemize}
 \end{frame}

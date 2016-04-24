@@ -13,13 +13,16 @@
             \item alle 5 Minuten
             \item Multicast
         \end{itemize}
-        \item Multicast Daten können auf mehreren Gateways gelesen werden
-        \item Die Daten können von dort an eine zentrale Webseite (Karte, etc.) geschickt werden
-    \end{itemize}
-    \begin{itemize}
-        \item Alfred-Legacy Provider
         \item Alfred-Proxy
-        \item beides nur auf dem Netmon-Server
+        \begin{itemize}
+            \item Multicast Daten werden gelesen
+            \item An das Monitoring geschickt
+        \end{itemize}
+        \item Alfred-Legacy Provider
+        \begin{itemize}
+            \item Kann die Daten wir Netmon laden
+        \end{itemize}
+    \item<2> {\color{red}Problem!} Beides nur auf dem Netmon-Server
     \end{itemize}
 \end{frame}
 
@@ -42,16 +45,15 @@
         \item Basiert auf OpenWrt
         \item ,,Eigenes'' Framework (Buildscript)
         \item Zentrales ,,files'' Verzeichnis
+        \begin{itemize}
+            \item<2> {\color{red}Problem!} Keine Abhängigkeiten; Schlecht zu pflegen
+        \end{itemize}
         \item Board-Support-Packages
         \begin{itemize}
             \item Ein .config
             \item Überschreibende ,,files''
         \end{itemize}
         \item Template System für versch. Communities
-        \item Versionierung:
-            \begin{itemize}
-                \item YYYYmmDD
-                \item ...
-            \end{itemize}
+        \item Versionierung: YYYYmmDD
     \end{itemize}
 \end{frame}
