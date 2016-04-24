@@ -1,70 +1,34 @@
-\section{Mögliche Lösungen}
+\section{Ausblick}
 \begin{frame}{}
     \begin{center}
-        Mögliche Lösungen
+        Ausblick
      \end{center}
 \end{frame}
 
-\begin{frame}{Größten Baustellen}
-    Größere (längerfristige) Baustellen:
+\begin{frame}{Aktuelle Probleme}
     \begin{itemize}
-        \item Netmon soll weg
-        \item KeyXchange soll dezentralisiert werden
-        \item Funk Verbindungen zwischen Hoods
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Monitoring}
-    \begin{itemize}
-        \item Netmon abschalten, Abhängigkeiten lösen
+        \item KeyXchange
         \begin{itemize}
-            \item keyXchange
-            \item neues Monitoring
-        \end{itemize}
-        \item Position und Owner Daten vom Gerät
-        \item Webinterface nötig
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Webinterface}
-    \begin{itemize}
-        \item \zb{} mit haserl (Freifunk Bielefeld)
-        \item \zb{} mit lua (OpenWrt)
-        \item Parameter setzen
-        \begin{itemize}
-            \item Koordinaten setzen
-                \begin{itemize}
-                    \item Lösung gesucht: Kartenansicht ohne Netz?
-                \end{itemize}
-            \item Kontakt-Daten
-        \end{itemize}
-        \item Problem: ''GUI'' Browser und IPv6 Link-Local
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{IP für Knoten}
-    \begin{itemize}
-        \item Knoten müssen eine normale IP bekommen
-        \item DHCP IP immer anders $\rightarrow$ wie Router finden?
-        \begin{itemize}
-            \item Dynamic DNS: MAC.node.fff.community
+            \item VPN Schlüsseltausch über zentrales Tool
             \begin{itemize}
-                \item Muss schnell gehen $\rightarrow$ DHCP setzt das Dynamic DNS
-                \item Problem: offline Knoten
-            \end{itemize}
-            \item Local-Node IP:
-            \begin{itemize}
-                \item Jeder Knoten hat die selbe IP
-                \item Beispiel: Vom DHCP zugewiesene Netzadresse +127
-                \item Local-Node IP wird nicht ins Mesh geroutet
-                \item Problem: Geht nur bei größeren Netzen
-            \end{itemize}
-            \item IP im Monitoring nachschlagen
-            \begin{itemize}
-                \item Problem: offline Knoten
+                \item Manuelle Zuweisung der VPN Server
+                \item Keine Anpassung an Firmware
+                \item[$\rightarrow$] Loop durch versehentliches Meshing
             \end{itemize}
         \end{itemize}
-        \item Local Node mit ebtables?
+        \item L3-Netz
+        \begin{itemize}
+            \item Kein Traffic Balancing zwischen VPN Server und Gateways
+            \item Keine Möglichkeit die L2 Netze per Richtfunk zu verbinden
+        \end{itemize}
+        \item Monitoring:
+        \begin{itemize}
+            \item Ein Alfred-Proxy für alle Hoods
+        \end{itemize}
+        \item Firmware-Build:
+        \begin{itemize}
+            \item OpenWrt Packages
+        \end{itemize}
     \end{itemize}
 \end{frame}
 

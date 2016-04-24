@@ -1,0 +1,57 @@
+\section{Dienste}
+\begin{frame}{}
+    \begin{center}
+        Dienste im Netz
+     \end{center}
+\end{frame}
+
+\begin{frame}{Monitoring}
+    \begin{itemize}
+        \item Alfred
+        \begin{itemize}
+            \item XML
+            \item alle 5 Minuten
+            \item Multicast
+        \end{itemize}
+        \item Multicast Daten können auf mehreren Gateways gelesen werden
+        \item Die Daten können von dort an eine zentrale Webseite (Karte, etc.) geschickt werden
+    \end{itemize}
+    \begin{itemize}
+        \item Alfred-Legacy Provider
+        \item Alfred-Proxy
+        \item beides nur auf dem Netmon-Server
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Domain-Name-System}
+    \begin{itemize}
+        \item fff.community
+        \begin{itemize}
+            \item Langer Name, aber
+            \item Keine Kollision
+        \end{itemize}
+        \item Mehrere DNS Server
+        \item Zonen-Synchronisation über dig axfr
+        \item Subdelegation an synchronisierte Hosts möglich
+        \item Automatisierte reverse delegation
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Firmware Bau}
+    \begin{itemize}
+        \item Basiert auf OpenWrt
+        \item ,,Eigenes'' Framework (Buildscript)
+        \item Zentrales ,,files'' Verzeichnis
+        \item Board-Support-Packages
+        \begin{itemize}
+            \item Ein .config
+            \item Überschreibende ,,files''
+        \end{itemize}
+        \item Template System für versch. Communities
+        \item Versionierung:
+            \begin{itemize}
+                \item YYYYmmDD
+                \item ...
+            \end{itemize}
+    \end{itemize}
+\end{frame}

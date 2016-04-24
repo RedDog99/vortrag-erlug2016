@@ -1,0 +1,61 @@
+\section{Netz}
+\begin{frame}{}
+    \begin{center}
+        Das Netz
+     \end{center}
+\end{frame}
+
+\begin{frame}{Knoten VPN}
+    \begin{itemize}
+        \item Verwendetes VPN: fastd
+        \begin{itemize}
+            \item {\small{}Wir nutzen keine Verschlüsselung (! :-O)}
+        \end{itemize}
+        \item Endpunkt Vermittlung über KeyXchange:
+        \begin{itemize}
+            \item Zentrale Webseite \only<2-3>{{\color{red}Problem!}}
+            \item Knoten meldet sich mit Standort
+            \item Geographisch nächste Hood wird zugewiesen (voronoi)
+            \item Client bekommt Liste aller Server der Hood
+        \end{itemize}
+        \item<3> Keine weitere Unterscheidung zu welcher Hood der Knoten gehört
+        \item<3> {\color{red}Problem!} Funk Verbindung zwischen den Hoods
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{VPN Server}
+    \begin{itemize}
+        \item VPN Server: In jeder Hood gibt es mehrere davon
+        \item Hoodzuweisung manuell im KeyXchange
+        \item DHCP
+        \begin{itemize}
+            \item Aktuell ausschließlich IPv4
+            \item Unterschiedliche Latenzen: Ungleiche Server Auslastung
+            \begin{itemize}
+                \item[$\rightarrow$] Batman-Adv GW Selection
+                \item Anpassung nach Traffic Auslastung
+            \end{itemize}
+        \end{itemize}
+        \item DNS Namesauflösung
+        \item Policy base routing
+        \item VPN (GRE) Tunnel zu anderen Gateways
+        \item OLSR
+        \begin{itemize}
+            \item Routing zu anderen Gateways
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gateways}
+    \begin{itemize}
+        \item Verbindet Freifunk und Internet
+        \item IPv4 NAT (oft übers Ausland) ins Internet
+        \item Announced 0.0.0.0/0 via OLSR
+        \begin{itemize}
+            \item Dynamic Gateway Plugin
+            \item VPN Server können diese Routen nutzen
+        \end{itemize}
+        \item Routing Metrik ohne Traffic/Bandbreite
+        \item<2> {\color{red}Problem!} Ungleiche Traffic Verteilung
+    \end{itemize}
+\end{frame}
