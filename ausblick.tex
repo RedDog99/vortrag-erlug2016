@@ -21,32 +21,33 @@
             \item Kein Traffic Balancing zwischen VPN Server und Gateways
             \item Keine Möglichkeit die L2 Netze per Richtfunk zu verbinden
         \end{itemize}
-        \item Monitoring:
-        \begin{itemize}
-            \item Ein Alfred-Proxy für alle Hoods
-        \end{itemize}
-        \item Firmware-Build:
-        \begin{itemize}
-            \item OpenWrt Packages
-        \end{itemize}
+%        \item Monitoring
+%        \begin{itemize}
+%            \item Ein Alfred-Proxy für alle Hoods
+%        \end{itemize}
+%        \item Firmware-Build
+%        \begin{itemize}
+%            \item OpenWrt Packages
+%        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{KeyXchange}
     \begin{itemize}
-        \item Dezentralisieren: Knoten soll selber seine Hood finden
+        \item Dezentralisieren
         \begin{itemize}
-            \item VPN Server auswählen
-            \item VPN Server alle Verbindungen akzeptieren
+            \item Hood finden
+            \begin{itemize}
+                \item Zum richtigen VPN verbinden
+                \item WiFi Settings einstellen
+            \end{itemize}
+            \item Neue VPN Server eintragen
+            \item Neue Hoods anlegen
         \end{itemize}
-        \item WiFi Settings auswählen
+        \item Sicherheit?
         \begin{itemize}
-            \item Problem: wenn z.B. kein VPN da ist?
-        \end{itemize}
-        \item Zwei Dinge werden benötigt: 
-        \begin{itemize}
-            \item Mögliche VPN Server
-            \item Daten der Hood (WiFi / Routing / etc)
+            \item Ausfälle
+            \item Manipulationen
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -99,14 +100,14 @@
             \begin{itemize}
                 \item Immer noch zentral
                 \begin{itemize}
-                    \item[$\rightarrow$] .. später mal sync daemon?
+                    \item[$\rightarrow$] .. später mal ,,sync daemon''?
                 \end{itemize}
             \end{itemize}
-        \item Überschreiben/Löschen absichern
+        \item Gegen Überschreiben/Löschen absichern
         \begin{itemize}
             \item[$\rightarrow$] Synchronisation nur mit Signatur
         \end{itemize}
-        \item Knoten ohne WAN
+        \item Knoten ohne WAN / VPN
         \begin{itemize}
             \item Config Access-Point
         \end{itemize}
