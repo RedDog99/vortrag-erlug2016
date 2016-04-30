@@ -6,24 +6,36 @@
 \end{frame}
 
 \begin{frame}{Monitoring}
-    \begin{itemize}
-        \item Alfred
+    \only<1-2>{
+        \begin{center}
+            \vspace{-0.1\textheight}
+            \noindent\fbox{\noindent
+                \only<1>{\includegraphics[width=0.77\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax]{img/monitoring-map.png}}%
+                \only<2>{\includegraphics[width=0.77\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax]{img/monitoring-statistic.png}}%
+            }
+            \vspace{-0.1\textheight}
+        \end{center}
+    }
+    \only<3-4>{
         \begin{itemize}
-            \item XML
-            \item alle 5 Minuten
-            \item Multicast
+            \item Alfred
+            \begin{itemize}
+                \item XML
+                \item alle 5 Minuten
+                \item Multicast
+            \end{itemize}
+            \item Alfred-Proxy
+            \begin{itemize}
+                \item Multicast Daten werden gelesen
+                \item An das Monitoring geschickt
+            \end{itemize}
+            \item Alfred-Legacy Provider
+            \begin{itemize}
+                \item Kann die Daten wir Netmon laden
+            \end{itemize}
+        \item<4> {\color{red}Problem!} Beides nur auf dem Netmon-Server
         \end{itemize}
-        \item Alfred-Proxy
-        \begin{itemize}
-            \item Multicast Daten werden gelesen
-            \item An das Monitoring geschickt
-        \end{itemize}
-        \item Alfred-Legacy Provider
-        \begin{itemize}
-            \item Kann die Daten wir Netmon laden
-        \end{itemize}
-    \item<2> {\color{red}Problem!} Beides nur auf dem Netmon-Server
-    \end{itemize}
+    }
 \end{frame}
 
 \begin{frame}{Domain-Name-System}
